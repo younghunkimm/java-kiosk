@@ -46,5 +46,7 @@ public class Main {
         } catch (InputMismatchException e) {
             System.out.println("잘못된 입력값입니다.");
         }
+
+        scanner.close();
     }
 }
