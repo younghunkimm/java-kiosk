@@ -37,7 +37,7 @@ public class MenuItem {
         return description;
     }
 
-    public static com.example.lv2.MenuItem fromNum(List<com.example.lv2.MenuItem> menuItems, int num) throws IllegalArgumentException {
+    public static MenuItem fromNum(List<MenuItem> menuItems, int num) throws IllegalArgumentException {
         return menuItems.stream()
                 .filter(menuItem -> menuItem.getNum() == num)
                 .findFirst()
