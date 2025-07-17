@@ -27,4 +27,9 @@ public class MenuItem {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return "%-15s | W %10s | %s".formatted(name, price, description);
+    }
 }
