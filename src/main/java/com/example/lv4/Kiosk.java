@@ -1,57 +1,48 @@
 package com.example.lv4;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    private final List<MenuItem> menuItems;
+    private final List<Menu> menus;
+    private List<MenuItem> menuitems;
 
-    /**
-     * 버거메뉴들의 배열을 받아와 {@code menuItems} 필드에 할당한다.
-     *
-     * @param menuItems 버거메뉴들의 배열
-     */
-    public Kiosk(List<MenuItem> menuItems) {
-        this.menuItems = new ArrayList<>(menuItems);
-    }
-
-    public List<MenuItem> getMenuItems() {
-        return menuItems;
+    public Kiosk(List<Menu> menus) {
+        this.menus = new ArrayList<>(menus);
     }
 
     public void start() {
-        // Scanner 선언
-        Scanner scanner = new Scanner(System.in);
+        // 스캐너 선언
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("[ SHAKESHACK MENU ]");
+        // 반복문 시작
+        while (true) {
+            System.out.println("[ MAIN MENU ]");
 
-        // 반복문을 활용해 List 안에 있는 MenuItem을 하나씩 출력
-        for (MenuItem menuItem : menuItems) {
-            menuItem.printInfo();
-        }
-
-        System.out.println("0. 종료");
-
-        try {
-            // 숫자를 입력 받기
-            int selected = scanner.nextInt();
-
-            // 입력된 숫자에 따른 처리
-            if (selected == 0) {
-                // 프로그램을 종료
-                System.out.println("프로그램을 종료합니다.");
-            } else {
-                // 선택한 메뉴 : 이름, 가격, 설명
-                MenuItem.fromNum(menuItems, selected).printInfo();
+            // List와 Menu 클래스 활용하여 상위 카테고리 메뉴 출력
+            for (int i = 0; i < menus.size(); i++) {
+                System.out.println((i + 1) + ". " + menus.get(i).getCategory());
             }
-        } catch (InputMismatchException e) {
-            System.out.println("잘못된 입력값입니다.");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
 
-        scanner.close();
+            System.out.println("0. 종료");
+
+            // 숫자 입력 받기
+            // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
+            // List<Menu>에 인덱스로 접근하면 Menu만 추출할 수 있겠죠?
+            Menu selectedMainMenu = menus.get(sc.nextInt() - 1);
+
+            // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
+            System.out.println("[ " + selectedMainMenu.getCategory().toUpperCase() + " MENU ]");
+            selectedMainMenu.printMenuItemAll();
+            System.out.println("0. 뒤로가기");
+
+            // 숫자 입력 받기
+            // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
+            // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
+
+            // FIXME: 임시 break 제거!!
+            break;
+        }
     }
 }
