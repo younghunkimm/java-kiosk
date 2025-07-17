@@ -31,6 +31,10 @@ public class Kiosk {
 
                 // 숫자 입력 받기
                 int choiceCategory = sc.nextInt();
+                if (choiceCategory == 0) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                }
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
                 // List<Menu>에 인덱스로 접근하면 Menu만 추출할 수 있겠죠?
@@ -43,6 +47,10 @@ public class Kiosk {
 
                 // 숫자 입력 받기
                 int choiceMenuItem = sc.nextInt();
+                if (choiceMenuItem == 0) {
+                    System.out.println("뒤로가기를 선택하셨습니다.");
+                    continue;
+                }
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
                 // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
@@ -53,9 +61,6 @@ public class Kiosk {
             } finally {
                 sc.nextLine(); // 버퍼 비우기
             }
-
-            // FIXME: 임시 break 제거!!
-            break;
         }
 
         sc.close();
