@@ -13,19 +13,19 @@
 ## 📂 프로젝트 구조
 
 ```ruby
-lv1
+lv1/
 └── Main.java
 
-lv2
+lv2/
 ├── Main.java
 └── MenuItem.java
 
-lv3
+lv3/
 ├── Kiosk.java
 ├── Main.java
 └── Menu.java
 
-lv4
+lv4/
 ├── Kiosk.java
 ├── Main.java
 ├── Menu.java
