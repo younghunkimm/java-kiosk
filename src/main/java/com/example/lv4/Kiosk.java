@@ -19,14 +19,8 @@ public class Kiosk {
         // 반복문 시작
         while (true) {
             try {
-                System.out.println("[ MAIN MENU ]");
-
-                // List와 Menu 클래스 활용하여 상위 카테고리 메뉴 출력
-                for (int i = 0; i < menus.size(); i++) {
-                    System.out.println((i + 1) + ". " + menus.get(i).getCategory());
-                }
-
-                System.out.println("0. 종료");
+                // 메인메뉴 선택 안내
+                printMainMenuList();
 
                 // 숫자 입력 받기
                 int choiceCategory = sc.nextInt();
@@ -39,10 +33,8 @@ public class Kiosk {
                 // List<Menu>에 인덱스로 접근하면 Menu만 추출할 수 있겠죠?
                 Menu selectedMainMenu = menus.get(choiceCategory - 1);
 
-                // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
-                System.out.println("[ " + selectedMainMenu.getCategory().toUpperCase() + " MENU ]");
-                selectedMainMenu.printMenuItemAll();
-                System.out.println("0. 뒤로가기");
+                // 메뉴 아이템 선택 안내
+                printMenuItemList(selectedMainMenu);
 
                 // 숫자 입력 받기
                 int choiceMenuItem = sc.nextInt();
@@ -54,7 +46,7 @@ public class Kiosk {
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
                 // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
                 MenuItem selectedMenuItem = selectedMainMenu.getMenuItems().get(choiceMenuItem - 1);
-                System.out.printf("선택한 메뉴: %s %n", selectedMenuItem.toString());
+                System.out.printf("✔ %s %n", selectedMenuItem.toString());
             } catch (IndexOutOfBoundsException | InputMismatchException e) {
                 System.out.println("해당 메뉴는 존재하지 않습니다.");
             } finally {
@@ -63,5 +55,25 @@ public class Kiosk {
         }
 
         sc.close();
+    }
+
+    // 메인메뉴 선택 안내
+    private void printMainMenuList() {
+        System.out.printf("%n[ MAIN MENU ]%n");
+
+        // List와 Menu 클래스 활용하여 상위 카테고리 메뉴 출력
+        for (int i = 0; i < menus.size(); i++) {
+            System.out.println((i + 1) + ". " + menus.get(i).getCategory());
+        }
+
+        System.out.printf("0. 종료%n");
+    }
+
+    // 메뉴 아이템 선택 안내
+    private void printMenuItemList(Menu selectedMainMenu) {
+        // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
+        System.out.printf("%n[ %S MENU ]%n", selectedMainMenu.getCategory());
+        selectedMainMenu.printMenuItemAll();
+        System.out.printf("0. 뒤로가기%n");
     }
 }
