@@ -9,9 +9,9 @@ public class MenuItem {
     private final String description;
 
     // 생성자
-    public MenuItem(String name, BigDecimal price, String description) {
+    public MenuItem(String name, String price, String description) {
         this.name = name;
-        this.price = price;
+        this.price = new BigDecimal(price);
         this.description = description;
     }
 
