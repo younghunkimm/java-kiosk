@@ -30,9 +30,11 @@ public class Kiosk {
                 System.out.println("0. 종료");
 
                 // 숫자 입력 받기
+                int choiceCategory = sc.nextInt();
+
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
                 // List<Menu>에 인덱스로 접근하면 Menu만 추출할 수 있겠죠?
-                Menu selectedMainMenu = menus.get(sc.nextInt() - 1);
+                Menu selectedMainMenu = menus.get(choiceCategory - 1);
 
                 // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
                 System.out.println("[ " + selectedMainMenu.getCategory().toUpperCase() + " MENU ]");
@@ -40,9 +42,11 @@ public class Kiosk {
                 System.out.println("0. 뒤로가기");
 
                 // 숫자 입력 받기
+                int choiceMenuItem = sc.nextInt();
+
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
                 // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
-                MenuItem selectedMenuItem = selectedMainMenu.getMenuItems().get(sc.nextInt() - 1);
+                MenuItem selectedMenuItem = selectedMainMenu.getMenuItems().get(choiceMenuItem - 1);
                 System.out.printf("%s %n", selectedMenuItem.toString());
             } catch (IndexOutOfBoundsException | InputMismatchException e) {
                 System.out.println("해당 메뉴는 존재하지 않습니다.");
