@@ -55,7 +55,7 @@ public class Kiosk {
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
                 // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
                 MenuItem selectedMenuItem = selectedMainMenu.getMenuItems().get(choiceMenuItem - 1);
-                System.out.printf("%s %n", selectedMenuItem.toString());
+                System.out.printf("선택한 메뉴: %s %n", selectedMenuItem.toString());
             } catch (IndexOutOfBoundsException | InputMismatchException e) {
                 System.out.println("해당 메뉴는 존재하지 않습니다.");
             } finally {
