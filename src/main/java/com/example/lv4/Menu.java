@@ -19,14 +19,7 @@ public class Menu {
     public void printMenuItemAll() {
         for (int i = 0; i < menuItems.size(); i++) {
             MenuItem menuItem = menuItems.get(i);
-
-            System.out.printf(
-                    "%d. %-15s | W %10s | %s %n",
-                    i + 1,
-                    menuItem.getName(),
-                    menuItem.getPrice(),
-                    menuItem.getDescription()
-            );
+            System.out.printf("%d. %s %n", i + 1, menuItem.toString());
         }
     }
 
