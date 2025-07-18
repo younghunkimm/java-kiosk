@@ -33,4 +33,9 @@ public class Cart {
     public void add(MenuItem menuItem) {
         cartList.add(menuItem);
     }
+
+    // 장바구니 비우기
+    public void clear() {
+        cartList.clear();
+    }
 }
