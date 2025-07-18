@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    // 분류
+    // 카테고리
     private final String category;
 
     // MenuItem 클래스를 List로 관리
@@ -33,7 +33,6 @@ public class Menu {
         return category;
     }
 
-    // 구조에 맞게 함수를 선언해놓고 가져다 사용하세요.
     // MenuItem을 배열에 추가
     public void add(MenuItem menuItem) {
         menuItems.add(menuItem);
