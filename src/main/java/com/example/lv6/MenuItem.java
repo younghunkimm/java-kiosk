@@ -15,7 +15,7 @@ public class MenuItem {
         this.description = description;
     }
 
-    // 구조에 맞게 함수를 선언해놓고 가져다 사용하세요.
+    // 기능
     public String getName() {
         return name;
     }
