@@ -35,6 +35,8 @@ public class Kiosk {
                     // 조회
                     // 입력값 == [메뉴종류의 개수 + 1]
                     if (choiceCategory == menus.size() + 1) {
+                        System.out.printf("%n아래와 같이 주문 하시겠습니까?%n");
+
                         System.out.printf("%n[ Orders ]%n");
 
                         // 장바구니에 있는 메뉴들을 출력한다.
@@ -49,6 +51,7 @@ public class Kiosk {
                         System.out.println("1. 주문       2. 메뉴판");
                         if ("1".equals(sc.next())) {
                             System.out.printf("%n주문이 완료되었습니다. 금액은 W %s 입니다.%n", cart.getTotalPrice());
+                            cart.clear();
                         }
 
                         continue;
@@ -57,7 +60,10 @@ public class Kiosk {
                     // 주문 취소
                     // 입력값 == [메뉴종류의 개수 + 2]
                     if (choiceCategory == menus.size() + 2) {
+                        System.out.printf("%n진행중인 주문을 취소하였습니다.%n");
+                        cart.clear();
 
+                        continue;
                     }
                 }
 
