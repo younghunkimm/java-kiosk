@@ -1,9 +1,6 @@
 package com.example.lv6;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kiosk {
     private final List<Menu> menus;
@@ -40,8 +37,8 @@ public class Kiosk {
                         System.out.printf("%n[ Orders ]%n");
 
                         // 장바구니에 있는 메뉴들을 출력한다.
-                        for (MenuItem menuItem : cart.getCartList()) {
-                            System.out.printf("🥄 %s %n", menuItem.toString());
+                        for (Map.Entry<MenuItem, Integer> entry : cart.getCartList().entrySet()) {
+                            System.out.printf("🥄 %s (%d개) %n", entry.getKey().toString(), entry.getValue());
                         }
 
                         // 장바구니에 있는 메뉴들의 가격 합계를 출력한다.
@@ -90,7 +87,7 @@ public class Kiosk {
 
                 if ("1".equals(sc.next())) {
                     // 장바구니에 추가
-                    cart.add(selectedMenuItem);
+                    cart.put(selectedMenuItem);
 
                     System.out.printf("%n🛒 %s 이 장바구니에 추가되었습니다.%n", selectedMenuItem.getName());
                     System.out.printf("%n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.%n");
