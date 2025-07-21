@@ -34,9 +34,18 @@ public class Cart {
         cartList.put(menuItem, cartList.getOrDefault(menuItem, 0) + 1);
     }
 
-    // 장바구니 제거
-    public void remove(MenuItem menuItem) {
-        cartList.remove(menuItem);
+    // 장바구니 제거 (1개씩)
+    public void remove(MenuItem menuItem) throws IllegalArgumentException {
+        if (!cartList.containsKey(menuItem)) {
+            throw new IllegalArgumentException("메뉴가 존재하지 않아 삭제하실 수 없습니다.");
+        }
+
+        int qty = cartList.get(menuItem);
+        if (qty > 1) {
+            cartList.replace(menuItem, qty - 1);
+        } else {
+            cartList.remove(menuItem);
+        }
     }
 
     // 장바구니 비우기
