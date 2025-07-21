@@ -34,6 +34,11 @@ public class Cart {
         cartList.put(menuItem, cartList.getOrDefault(menuItem, 0) + 1);
     }
 
+    // 장바구니 제거
+    public void remove(MenuItem menuItem) {
+        cartList.remove(menuItem);
+    }
+
     // 장바구니 비우기
     public void clear() {
         cartList.clear();
