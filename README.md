@@ -12,44 +12,54 @@
 
 ## 📂 프로젝트 구조
 
-```ruby
-lv1/
-└── Main.java
+<details>
+  <summary>프로젝트 구조</summary>
+  
+  ```ruby
+  lv1/
+  └── Main.java
+  
+  lv2/
+  ├── Main.java
+  └── MenuItem.java
+  
+  lv3/
+  ├── Kiosk.java
+  ├── Main.java
+  └── Menu.java
+  
+  lv4/
+  ├── Kiosk.java
+  ├── Main.java
+  ├── Menu.java
+  └── MenuItem.java
+  
+  lv6/
+  ├── Cart.java
+  ├── Kiosk.java
+  ├── Main.java
+  ├── Menu.java
+  └── MenuItem.java
+  
+  lv7/
+  ├── Cart.java
+  ├── Kiosk.java
+  ├── Main.java
+  ├── Menu.java
+  ├── MenuItem.java
+  └── UserType.java
+  ```
 
-lv2/
-├── Main.java
-└── MenuItem.java
+</details>
 
-lv3/
-├── Kiosk.java
-├── Main.java
-└── Menu.java
 
-lv4/
-├── Kiosk.java
-├── Main.java
-├── Menu.java
-└── MenuItem.java
-
-lv6/
-├── Cart.java
-├── Kiosk.java
-├── Main.java
-├── Menu.java
-└── MenuItem.java
-
-lv7/
-├── Cart.java
-├── Kiosk.java
-├── Main.java
-├── Menu.java
-├── MenuItem.java
-└── UserType.java
-```
 
 ## 💡 클래스 다이어그램
 
-```mermaid
+<details>
+  <summary>클래스 다이어그램</summary>
+
+  ```mermaid
 classDiagram
 direction BT
 class Cart {
@@ -113,6 +123,8 @@ Main  ..>  Menu : «create»
 Main  ..>  MenuItem : «create»
 Menu "1" *--> "menuItems *" MenuItem 
 ```
+  
+</details>
 
 
 ## ✅ LV1. 기본적인 키오스크 프로그래밍
