@@ -56,7 +56,7 @@ public class Kiosk {
                             }
 
                             UserType selectedUserType = UserType.fromOrdinal(sc.nextInt());
-                            BigDecimal calcPrice = selectedUserType.getCalcPrice(cart.getTotalPrice());
+                            BigDecimal calcPrice = selectedUserType.getDiscountPrice(cart.getTotalPrice());
 
                             System.out.printf("%n👏 주문이 완료되었습니다. 금액은 W %s 입니다.%n", calcPrice.toPlainString());
                             cart.clear();
