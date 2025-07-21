@@ -31,12 +31,7 @@ public enum UserType {
         throw new IllegalArgumentException("존재하지 않는 회원 분류입니다.");
     }
 
-    public BigDecimal getCalcPrice(BigDecimal price) {
-        BigDecimal calcPrice;
-        calcPrice = price.multiply(getDiscount());
-        calcPrice = price.subtract(calcPrice);
-        calcPrice = calcPrice.stripTrailingZeros();
-
-        return calcPrice;
+    public BigDecimal getDiscountPrice(BigDecimal price) {
+        return price.multiply(BigDecimal.ONE.subtract(getDiscount())).stripTrailingZeros();
     }
 }
