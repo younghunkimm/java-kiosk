@@ -46,8 +46,9 @@ public class Kiosk {
                         System.out.printf("%n[ Total ]%n");
                         System.out.printf("💰 W %s %n%n", cart.getTotalPrice());
 
-                        System.out.println("1. 주문       2. 메뉴판");
-                        if ("1".equals(sc.next())) {
+                        System.out.println("1. 주문       2. 메뉴판       3. 제거");
+                        String choiceOrder = sc.next();
+                        if ("1".equals(choiceOrder)) {
                             // 할인 정보 출력
                             System.out.println("\n할인 정보를 입력해주세요.\n");
                             for (UserType userType : UserType.values()) {
@@ -59,6 +60,28 @@ public class Kiosk {
 
                             System.out.printf("%n👏 주문이 완료되었습니다. 금액은 W %s 입니다.%n", calcPrice.toPlainString());
                             cart.clear();
+                        }
+                        else if ("3".equals(choiceOrder)) {
+                            // 장바구니 메뉴 제거
+                            // Map은 index를 지원하지 않는다.
+                            Set<MenuItem> cartListKeys = cart.getCartList().keySet();
+                            // 배열의 크기를 0으로 선언하면 자동으로 배열길이만큼 설정된다.
+                            MenuItem[] keyArray = cartListKeys.toArray(new MenuItem[0]);
+
+                            System.out.println("\n제거할 메뉴를 선택해주세요.\n");
+                            for (int i = 0; i < keyArray.length; i++) {
+                                MenuItem key = keyArray[i];
+                                Integer value = cart.getCartList().get(key);
+                                System.out.printf("%d. %s (%d개) %n", i + 1, key.toString(), value);
+                            }
+                            System.out.println("0. 취소");
+
+                            int choiceRemove = sc.nextInt();
+                            MenuItem removeItem = keyArray[choiceRemove - 1];
+                            String removeItemName = removeItem.getName();
+                            cart.remove(removeItem);
+
+                            System.out.printf("%n❌ %s 메뉴가 장바구니에서 삭제 되었습니다.%n", removeItemName);
                         }
 
                         continue;
