@@ -1,5 +1,6 @@
 package com.example.lv7;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Kiosk {
@@ -47,7 +48,20 @@ public class Kiosk {
 
                         System.out.println("1. 주문       2. 메뉴판");
                         if ("1".equals(sc.next())) {
-                            System.out.printf("%n주문이 완료되었습니다. 금액은 W %s 입니다.%n", cart.getTotalPrice());
+                            // 할인 정보 출력
+                            System.out.println("\n할인 정보를 입력해주세요.\n");
+                            for (UserType userType : UserType.values()) {
+                                System.out.printf("%d. %-15s : %s%%%n", userType.ordinal() + 1, userType.getName(), userType.getDiscount().multiply(BigDecimal.valueOf(100)).stripTrailingZeros().toPlainString());
+                            }
+
+                            UserType selectedUserType = UserType.fromOrdinal(sc.nextInt());
+
+                            BigDecimal totalPrice;
+                            totalPrice = cart.getTotalPrice().multiply(selectedUserType.getDiscount());
+                            totalPrice = cart.getTotalPrice().subtract(totalPrice);
+                            totalPrice = totalPrice.stripTrailingZeros();
+
+                            System.out.printf("%n주문이 완료되었습니다. 금액은 W %s 입니다.%n", totalPrice.toPlainString());
                             cart.clear();
                         }
 
@@ -94,6 +108,8 @@ public class Kiosk {
                 }
             } catch (IndexOutOfBoundsException | InputMismatchException e) {
                 System.out.println("해당 메뉴는 존재하지 않습니다.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             } finally {
                 sc.nextLine(); // 버퍼 비우기
             }
