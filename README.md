@@ -10,49 +10,19 @@
 
 2025.07.16 ~ 
 
-## 📂 프로젝트 구조
+## 📂 프로젝트 구조 (도전2)
 
-<details>
-  <summary>프로젝트 구조</summary>
-  
-  ```ruby
-  lv1/
-  └── Main.java
-  
-  lv2/
-  ├── Main.java
-  └── MenuItem.java
-  
-  lv3/
-  ├── Kiosk.java
-  ├── Main.java
-  └── Menu.java
-  
-  lv4/
-  ├── Kiosk.java
-  ├── Main.java
-  ├── Menu.java
-  └── MenuItem.java
-  
-  lv6/
-  ├── Cart.java
-  ├── Kiosk.java
-  ├── Main.java
-  ├── Menu.java
-  └── MenuItem.java
-  
+  ```bash
   lv7/
   ├── utils/
-  │   └── NumberUtils.java
-  ├── Cart.java
-  ├── Kiosk.java
-  ├── Main.java
-  ├── Menu.java
-  ├── MenuItem.java
-  └── UserType.java
+  │   └── NumberUtils.java     # Number 관련 유틸
+  ├── Cart.java                # 장바구니
+  ├── Kiosk.java               # 핵심 로직, `start()`
+  ├── Main.java                # 프로그램 실행 시작 (DI)
+  ├── Menu.java                # 메뉴 카테고리, 아이템
+  ├── MenuItem.java            # 메뉴 아이템
+  └── UserType.java            # 할인 관련 enum
   ```
-
-</details>
 
 
 
