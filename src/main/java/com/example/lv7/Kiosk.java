@@ -69,7 +69,7 @@ public class Kiosk<T extends Number> {
                             // 장바구니 메뉴 제거
                             // Map은 index를 지원하지 않는다.
                             Set<MenuItem<T>> cartListKeys = cart.getCartList().keySet();
-                            // 배열의 크기를 0으로 선언하면 자동으로 배열길이만큼 설정된다.
+                            // 키값들을 List 배열로 설정
                             List<MenuItem<T>> keyList = new ArrayList<>(cartListKeys);
 
                             System.out.println("\n제거할 메뉴를 선택해주세요.\n");
