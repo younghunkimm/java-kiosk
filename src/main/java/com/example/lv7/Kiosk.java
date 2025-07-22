@@ -3,11 +3,11 @@ package com.example.lv7;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class Kiosk {
-    private final List<Menu> menus;
-    private final Cart cart = Cart.getInstance(); // 장바구니
+public class Kiosk<T extends Number> {
+    private final List<Menu<T>> menus;
+    private final Cart<T> cart = new Cart<>(); // 장바구니
 
-    public Kiosk(List<Menu> menus) {
+    public Kiosk(List<Menu<T>> menus) {
         this.menus = new ArrayList<>(menus);
     }
 
@@ -38,7 +38,7 @@ public class Kiosk {
                         System.out.printf("%n[ Orders ]%n");
 
                         // 장바구니에 있는 메뉴들을 출력한다.
-                        for (Map.Entry<MenuItem, Integer> entry : cart.getCartList().entrySet()) {
+                        for (Map.Entry<MenuItem<T>, Integer> entry : cart.getCartList().entrySet()) {
                             System.out.printf("🥄 %s (%d개) %n", entry.getKey().toString(), entry.getValue());
                         }
 
@@ -64,20 +64,20 @@ public class Kiosk {
                         else if ("3".equals(choiceOrder)) {
                             // 장바구니 메뉴 제거
                             // Map은 index를 지원하지 않는다.
-                            Set<MenuItem> cartListKeys = cart.getCartList().keySet();
+                            Set<MenuItem<T>> cartListKeys = cart.getCartList().keySet();
                             // 배열의 크기를 0으로 선언하면 자동으로 배열길이만큼 설정된다.
-                            MenuItem[] keyArray = cartListKeys.toArray(new MenuItem[0]);
+                            List<MenuItem<T>> keyList = new ArrayList<>(cartListKeys);
 
                             System.out.println("\n제거할 메뉴를 선택해주세요.\n");
-                            for (int i = 0; i < keyArray.length; i++) {
-                                MenuItem key = keyArray[i];
+                            for (int i = 0; i < keyList.size(); i++) {
+                                MenuItem<T> key = keyList.get(i);
                                 Integer value = cart.getCartList().get(key);
                                 System.out.printf("%d. %s (%d개) %n", i + 1, key.toString(), value);
                             }
                             System.out.println("0. 취소");
 
                             int choiceRemove = sc.nextInt();
-                            MenuItem removeItem = keyArray[choiceRemove - 1];
+                            MenuItem<T> removeItem = keyList.get(choiceRemove - 1);
                             String removeItemName = removeItem.getName();
                             cart.remove(removeItem);
 
@@ -98,7 +98,7 @@ public class Kiosk {
                 }
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
-                Menu selectedMainMenu = menus.get(choiceCategory - 1);
+                Menu<T> selectedMainMenu = menus.get(choiceCategory - 1);
 
                 // 메뉴 아이템 선택 안내
                 printMenuItemList(selectedMainMenu);
@@ -111,7 +111,7 @@ public class Kiosk {
                 }
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
-                MenuItem selectedMenuItem = selectedMainMenu.getMenuItems().get(choiceMenuItem - 1);
+                MenuItem<T> selectedMenuItem = selectedMainMenu.getMenuItems().get(choiceMenuItem - 1);
                 System.out.printf("✅ %s %n", selectedMenuItem.toString());
 
                 // 장바구니 추가 여부 안내
@@ -156,7 +156,7 @@ public class Kiosk {
     }
 
     // 메뉴 아이템 선택 안내
-    private void printMenuItemList(Menu selectedMainMenu) {
+    private void printMenuItemList(Menu<T> selectedMainMenu) {
         // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
         System.out.printf("%n[ %S MENU ]%n", selectedMainMenu.getCategory());
         selectedMainMenu.printMenuItemAll();

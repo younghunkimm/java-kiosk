@@ -4,38 +4,29 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cart {
-    private static Cart cart;
-    private final Map<MenuItem, Integer> cartList = new HashMap<>();
+import static com.example.lv7.utils.NumberUtils.convertToBigDecimal;
 
-    // 싱글턴 패턴 적용
-    private Cart() {}
+public class Cart<T extends Number> {
+    private final Map<MenuItem<T>, Integer> cartList = new HashMap<>();
 
-    public static Cart getInstance() {
-        if (cart == null) {
-            cart = new Cart();
-        }
-        return cart;
-    }
-
-    public Map<MenuItem, Integer> getCartList() {
+    public Map<MenuItem<T>, Integer> getCartList() {
         return cartList;
     }
 
     // 메뉴 합계금액 구하기
     public BigDecimal getTotalPrice() {
         return cartList.entrySet().stream()
-                .map(entry -> entry.getKey().getPrice().multiply(new BigDecimal(entry.getValue())))
+                .map(entry -> entry.getKey().getPrice().multiply(convertToBigDecimal(entry.getValue())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     // 장바구니 추가
-    public void put(MenuItem menuItem) {
+    public void put(MenuItem<T> menuItem) {
         cartList.put(menuItem, cartList.getOrDefault(menuItem, 0) + 1);
     }
 
     // 장바구니 제거 (1개씩)
-    public void remove(MenuItem menuItem) throws IllegalArgumentException {
+    public void remove(MenuItem<T> menuItem) throws IllegalArgumentException {
         if (!cartList.containsKey(menuItem)) {
             throw new IllegalArgumentException("메뉴가 존재하지 않아 삭제하실 수 없습니다.");
         }

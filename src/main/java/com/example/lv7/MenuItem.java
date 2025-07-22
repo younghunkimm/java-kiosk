@@ -2,16 +2,18 @@ package com.example.lv7;
 
 import java.math.BigDecimal;
 
-public class MenuItem {
+import static com.example.lv7.utils.NumberUtils.convertToBigDecimal;
+
+public class MenuItem<T extends Number> {
     // 이름, 가격, 설명 필드 선언하여 관리
     private final String name;
-    private final BigDecimal price;
+    private final T price;
     private final String description;
 
     // 생성자
-    public MenuItem(String name, String price, String description) {
+    public MenuItem(String name, T price, String description) {
         this.name = name;
-        this.price = new BigDecimal(price);
+        this.price = price;
         this.description = description;
     }
 
@@ -21,7 +23,7 @@ public class MenuItem {
     }
 
     public BigDecimal getPrice() {
-        return price.stripTrailingZeros();
+        return convertToBigDecimal(price).stripTrailingZeros();
     }
 
     public String getDescription() {
@@ -30,6 +32,6 @@ public class MenuItem {
 
     @Override
     public String toString() {
-        return "%-15s | W %10s | %s".formatted(name, price, description);
+        return "%-15s | W %10s | %s".formatted(getName(), getPrice(), getDescription());
     }
 }

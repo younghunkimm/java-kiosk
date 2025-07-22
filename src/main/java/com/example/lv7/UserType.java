@@ -2,18 +2,20 @@ package com.example.lv7;
 
 import java.math.BigDecimal;
 
+import static com.example.lv7.utils.NumberUtils.convertToBigDecimal;
+
 public enum UserType {
-    PATRIOT("국가유공자", "0.1"),
-    SOLDIER("군인", "0.05"),
-    STUDENT("학생", "0.03"),
-    GENERAL("일반", "0");
+    PATRIOT("국가유공자", 0.1),
+    SOLDIER("군인", 0.05),
+    STUDENT("학생", 0.03),
+    GENERAL("일반", 0);
 
     private final String name;
     private final BigDecimal discount;
 
-    UserType(String name, String discount) {
+    UserType(String name, double discount) {
         this.name = name;
-        this.discount = new BigDecimal(discount);
+        this.discount = convertToBigDecimal(discount);
     }
 
     public String getName() {
