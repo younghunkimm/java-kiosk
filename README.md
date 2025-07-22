@@ -31,71 +31,7 @@
 <details>
   <summary>클래스 다이어그램</summary>
 
-  ```mermaid
-classDiagram
-direction BT
-class Cart {
-  + remove(MenuItem) void
-  + clear() void
-  + put(MenuItem) void
-  - Cart() 
-   Cart instance
-   BigDecimal totalPrice
-   Map~MenuItem, Integer~ cartList
-  - Map~MenuItem, Integer~ cartList
-}
-class Kiosk {
-  - printMainMenuList() void
-  + start() void
-  - printMenuItemList(Menu) void
-  + Kiosk(List~Menu~) 
-}
-class Main {
-  + main(String[]) void
-  + Main() 
-}
-class Menu {
-  + add(MenuItem) void
-  + printMenuItemAll() void
-  + Menu(String) 
-   String category
-   List~MenuItem~ menuItems
-  - String category
-  - List~MenuItem~ menuItems
-}
-class MenuItem {
-  + toString() String
-  + MenuItem(String, String, String) 
-   String name
-   String description
-   BigDecimal price
-  - String description
-  - String name
-  - BigDecimal price
-}
-class UserType {
-<<enumeration>>
-  + fromOrdinal(int) UserType
-  + values() UserType[]
-  + getDiscountPrice(BigDecimal) BigDecimal
-  + valueOf(String) UserType
-  - UserType(String, String) 
-   String name
-   BigDecimal discount
-  - BigDecimal discount
-  - String name
-}
-
-Cart "1" *--> "cartList *" MenuItem 
-Kiosk "1" *--> "cart 1" Cart 
-Kiosk "1" *--> "menus *" Menu 
-Kiosk  ..>  MenuItem : «create»
-Main  ..>  Kiosk : «create»
-Main  ..>  Menu : «create»
-Main  ..>  MenuItem : «create»
-Menu "1" *--> "menuItems *" MenuItem 
-```
-  
+  <img alt="클래스 다이어그램" src="https://github.com/user-attachments/assets/78acf01e-cd3f-4594-84f7-146e9ce5ef54" />
 </details>
 
 
