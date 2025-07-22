@@ -1,8 +1,8 @@
 package com.example.lv7;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,12 +22,18 @@ public class Main {
         dessertMenu.add(new MenuItem<>("French Fries", 1.812, "감자튀김"));
         dessertMenu.add(new MenuItem<>("Fried Chicken", 9.99, "후라이드 치킨"));
 
+        // DI 객체 생성
         List<Menu<Double>> menus = new ArrayList<>(List.of(burgerMenu, drinkMenu, dessertMenu));
+        Scanner scanner = new Scanner(System.in);
+        Cart<Double> cart = new Cart<>();
 
         // Kiosk 객체 생성
-        Kiosk<Double> kiosk = new Kiosk<>(menus);
+        Kiosk<Double> kiosk = new Kiosk<>(menus, scanner, cart);
 
         // Kiosk 내 시작하는 함수 호출
         kiosk.start();
+
+        // Scanner 자원 해제
+        scanner.close();
     }
 }
