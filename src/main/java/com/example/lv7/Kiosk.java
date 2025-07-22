@@ -5,16 +5,20 @@ import java.util.*;
 
 public class Kiosk<T extends Number> {
     private final List<Menu<T>> menus;
-    private final Cart<T> cart = new Cart<>(); // 장바구니
+    private final Scanner scanner;
+    private final Cart<T> cart; // 장바구니
 
-    public Kiosk(List<Menu<T>> menus) {
+    public Kiosk(
+            List<Menu<T>> menus,
+            Scanner scanner,
+            Cart<T> cart
+    ) {
         this.menus = new ArrayList<>(menus);
+        this.scanner = scanner;
+        this.cart = cart;
     }
 
     public void start() {
-        // 스캐너 선언
-        Scanner sc = new Scanner(System.in);
-
         // 반복문 시작
         while (true) {
             try {
@@ -22,7 +26,7 @@ public class Kiosk<T extends Number> {
                 printMainMenuList();
 
                 // 숫자 입력 받기
-                int choiceCategory = sc.nextInt();
+                int choiceCategory = scanner.nextInt();
                 if (choiceCategory == 0) {
                     System.out.println("프로그램을 종료합니다.");
                     break;
@@ -47,7 +51,7 @@ public class Kiosk<T extends Number> {
                         System.out.printf("💰 W %s %n%n", cart.getTotalPrice());
 
                         System.out.println("1. 주문       2. 메뉴판       3. 제거");
-                        String choiceOrder = sc.next();
+                        String choiceOrder = scanner.next();
                         if ("1".equals(choiceOrder)) {
                             // 할인 정보 출력
                             System.out.println("\n할인 정보를 입력해주세요.\n");
@@ -55,7 +59,7 @@ public class Kiosk<T extends Number> {
                                 System.out.printf("%d. %-15s : %s%%%n", userType.ordinal() + 1, userType.getName(), userType.getDiscount().multiply(BigDecimal.valueOf(100)).stripTrailingZeros().toPlainString());
                             }
 
-                            UserType selectedUserType = UserType.fromOrdinal(sc.nextInt());
+                            UserType selectedUserType = UserType.fromOrdinal(scanner.nextInt());
                             BigDecimal calcPrice = selectedUserType.getDiscountPrice(cart.getTotalPrice());
 
                             System.out.printf("%n👏 주문이 완료되었습니다. 금액은 W %s 입니다.%n", calcPrice.toPlainString());
@@ -76,7 +80,7 @@ public class Kiosk<T extends Number> {
                             }
                             System.out.println("0. 취소");
 
-                            int choiceRemove = sc.nextInt();
+                            int choiceRemove = scanner.nextInt();
                             MenuItem<T> removeItem = keyList.get(choiceRemove - 1);
                             String removeItemName = removeItem.getName();
                             cart.remove(removeItem);
@@ -104,7 +108,7 @@ public class Kiosk<T extends Number> {
                 printMenuItemList(selectedMainMenu);
 
                 // 숫자 입력 받기
-                int choiceMenuItem = sc.nextInt();
+                int choiceMenuItem = scanner.nextInt();
                 if (choiceMenuItem == 0) {
                     System.out.println("뒤로가기를 선택하셨습니다.");
                     continue;
@@ -118,7 +122,7 @@ public class Kiosk<T extends Number> {
                 System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
                 System.out.println("1. 확인       2. 취소");
 
-                if ("1".equals(sc.next())) {
+                if ("1".equals(scanner.next())) {
                     // 장바구니에 추가
                     cart.put(selectedMenuItem);
 
@@ -130,11 +134,9 @@ public class Kiosk<T extends Number> {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             } finally {
-                sc.nextLine(); // 버퍼 비우기
+                scanner.nextLine(); // 버퍼 비우기
             }
         }
-
-        sc.close();
     }
 
     // 메인메뉴 선택 안내
