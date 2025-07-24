@@ -3,6 +3,15 @@ package com.example.explanation;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <h2>💡 키오스크의 <b>비즈니스 로직</b>을 담당하는 클래스</h2>
+ *
+ * <ul>
+ *     <li>{@code start()} 핵심 로직</li>
+ *     <li>메인 로직은 {@code start()} 에서 관리하되 세부 로직들은 메소드로 분리</li>
+ *     <li>다른 객체들의 비즈니스 로직들을 활용(정보 요청)</li>
+ * </ul>
+ */
 public class KioskService {
     private final Scanner sc;
     private final Kiosk kiosk;
