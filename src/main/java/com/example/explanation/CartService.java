@@ -2,6 +2,11 @@ package com.example.explanation;
 
 import java.util.Map;
 
+/**
+ * <h2>💡 장바구니의 <b>비즈니스 로직</b>을 담당하는 클래스</h2>
+ *
+ * <p>메뉴 담기, 장바구니 비우기, 금액 계산 등...</p>
+ */
 public class CartService {
     private final Cart cart;
 
